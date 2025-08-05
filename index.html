@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Peppy Memecoin Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      font-family: Arial, sans-serif;
+      scroll-behavior: smooth;
+      color: #000;
+      min-height: 100vh;
+      background:url(bn.png) no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background: transparent; /* Transparent navbar */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-weight: bold;
+      font-size: 1.8rem;
+      color: white;
+      text-shadow: 1px 1px 4px black;
+    }
+
+    nav {
+      display: flex;
+      gap: 1rem;
+    }
+
+    nav button {
+      background: transparent;
+      border: none;
+      font-weight: bold;
+      font-size: 1rem;
+      padding: 0.6rem 1.3rem;
+      border-radius: 5px;
+      color: white;
+      cursor: pointer;
+      text-shadow: 1px 1px 3px black;
+      transition: background-color 0.3s ease, transform 0.15s ease;
+    }
+
+    nav button:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      transform: scale(0.97);
+    }
+
+    nav button:active {
+      background-color: rgba(255, 255, 255, 0.2);
+      transform: scale(0.95);
+    }
+
+    section {
+      min-height: 100vh;
+      padding: 100px 1rem 60px 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: brightness(1.1);
+    }
+
+    #home {
+      text-align: center;
+      color: white;
+    }
+
+    #home h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+    }
+
+    .service-item,
+    .gallery-img,
+    .community-item,
+    .info-box {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(5px);
+    }
+
+    .service-item, .community-item {
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+      overflow: hidden;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .service-item:hover, .community-item:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .service-item img,
+    .community-item img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    #services,
+    #gallery,
+    #community,
+    #tokenomics-buy {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 1.5rem;
+    }
+
+    #services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    #gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .gallery-img img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 12px;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-img:hover img {
+      transform: scale(1.1);
+    }
+
+    #community {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    #tokenomics-buy .section-container {
+      text-align: center;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .info-box {
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+      transition: transform 0.3s ease;
+    }
+
+    .info-box:hover {
+      transform: translateY(-6px);
+    }
+
+    #contact {
+      flex-direction: column;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 3rem 1rem 4rem;
+      text-align: center;
+    }
+
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .social-links a {
+      padding: 0.5rem 1.2rem;
+      border: 2px solid black;
+      border-radius: 6px;
+      text-decoration: none;
+      color: black;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      background-color: black;
+      color: white;
+    }
+
+    .coming-soon {
+      margin-top: 2rem;
+      font-weight: bold;
+      color: #444;
+    }
+
+    @media (max-width: 600px) {
+      .info-grid, #services, #gallery, #community {
+        grid-template-columns: 1fr;
+      }
+
+      nav {
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+
+      .logo {
+        font-size: 1.3rem;
+      }
+
+      header {
+        flex-direction: column;
+        height: auto;
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Peppy</div>
+    <nav>
+      <button onclick="document.getElementById('home').scrollIntoView({behavior: 'smooth'})">Home</button>
+      <button onclick="document.getElementById('gallery').scrollIntoView({behavior: 'smooth'})">Gallery</button>
+      <button onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth'})">Services</button>
+      <button onclick="document.getElementById('community').scrollIntoView({behavior: 'smooth'})">Community</button>
+      <button onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Contact</button>
+    </nav>
+  </header>
+
+  <section id="home">
+    <h1>Welcome to Peppy Memecoin Portfolio</h1>
+  </section>
+
+  <section id="services">
+    <div class="service-item"><img src="https://via.placeholder.com/300x180"><h3>Service One</h3></div>
+    <div class="service-item"><img src="https://via.placeholder.com/300x180"><h3>Service Two</h3></div>
+    <div class="service-item"><img src="https://via.placeholder.com/300x180"><h3>Service Three</h3></div>
+    <div class="service-item"><img src="https://via.placeholder.com/300x180"><h3>Service Four</h3></div>
+    <div class="service-item"><img src="https://via.placeholder.com/300x180"><h3>Service Five</h3></div>
+    <div class="service-item"><img src="https://via.placeholder.com/300x180"><h3>Service Six</h3></div>
+  </section>
+
+  <section id="gallery">
+    <div class="gallery-img"><img src="https://via.placeholder.com/300x220"></div>
+    <div class="gallery-img"><img src="https://via.placeholder.com/300x220"></div>
+    <div class="gallery-img"><img src="https://via.placeholder.com/300x220"></div>
+    <div class="gallery-img"><img src="https://via.placeholder.com/300x220"></div>
+    <div class="gallery-img"><img src="https://via.placeholder.com/300x220"></div>
+    <div class="gallery-img"><img src="https://via.placeholder.com/300x220"></div>
+  </section>
+
+  <section id="community">
+    <div class="community-item"><img src="https://via.placeholder.com/300x180"><h4>Member One</h4></div>
+    <div class="community-item"><img src="https://via.placeholder.com/300x180"><h4>Member Two</h4></div>
+    <div class="community-item"><img src="https://via.placeholder.com/300x180"><h4>Member Three</h4></div>
+  </section>
+
+  <section id="tokenomics-buy">
+    <div class="section-container">
+      <h2>Tokenomics & How to Buy</h2>
+      <div class="info-grid">
+        <div class="info-box"><h3>Total Supply</h3><p>1,000,000,000 (1 Billion)</p></div>
+        <div class="info-box"><h3>Tax</h3><p>0% Buy/Sell Tax</p></div>
+        <div class="info-box"><h3>Burn Mechanism</h3><p>Deflationary model to increase scarcity and trust.</p></div>
+        <div class="info-box"><h3>Launch</h3><p>Launched on Pump.fun, later available on Raydium.</p></div>
+        <div class="info-box"><h3>How to Buy</h3><p>Buy on <a href="https://pump.fun" target="_blank">Pump.fun</a> or <a href="https://raydium.io" target="_blank">Raydium</a>.</p></div>
+        <div class="info-box"><h3>Wallet</h3><p>Use Phantom or Solflare to connect and trade.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="social-links">
+      <a href="https://twitter.com" target="_blank">Twitter</a>
+      <a href="https://telegram.org" target="_blank">Telegram</a>
+      <a href="https://facebook.com" target="_blank">Facebook</a>
+    </div>
+    <div class="coming-soon">Coming Soon...</div>
+  </section>
+</body>
+</html>
